@@ -19,6 +19,7 @@ namespace CheckId
 
         String m_strOriginNum = "";
         String m_strValidatedNum = "";
+        int m_numCount;
     
         public readonly int[] m_weight = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 };    //十七位数字本体码权重
         public readonly char[] m_validate = { '1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2' };    //mod11,对应校验码字符值    
@@ -40,7 +41,8 @@ namespace CheckId
             {
                 //输入数字符合要求，开始校验所有可能的号码
 
-                tbResultNum.Text = ""; 
+                tbResultNum.Text = "";
+                m_numCount = 0;
                 for (i=1; i <= 12; i++)
                 {
                     for (j=1; j<=31; j++)
@@ -55,12 +57,13 @@ namespace CheckId
                         m_NumToValidate[13] = (char)(j % 10 + (byte)'0');
                         if (true == CheckValidateCode(m_NumToValidate))
                         {
+                            m_numCount++;
                             strTemp = new string(m_NumToValidate);
                             tbResultNum.Text += strTemp  + "\r\n";
                         }
-
                     }
                 }
+                tbResultNum.Text += "共计有效号码：" + m_numCount + "个";
             }
         }
         private bool CheckValidateCode(char[] numChar)
@@ -89,7 +92,7 @@ namespace CheckId
             }
             mode = sum % 11;
 
-            if (mode == num[17])
+            if (m_validate[mode] == numChar[17])
             {
                 return true;
             }
