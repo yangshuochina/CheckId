@@ -32,7 +32,7 @@
             this.tbIdNum = new System.Windows.Forms.TextBox();
             this.tbResultNum = new System.Windows.Forms.TextBox();
             this.btnCalcNum = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.tbPasswd = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -53,12 +53,13 @@
             // 
             // tbResultNum
             // 
-            this.tbResultNum.Location = new System.Drawing.Point(102, 56);
+            this.tbResultNum.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbResultNum.Location = new System.Drawing.Point(12, 62);
             this.tbResultNum.Multiline = true;
             this.tbResultNum.Name = "tbResultNum";
             this.tbResultNum.ReadOnly = true;
             this.tbResultNum.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbResultNum.Size = new System.Drawing.Size(452, 457);
+            this.tbResultNum.Size = new System.Drawing.Size(360, 531);
             this.tbResultNum.TabIndex = 2;
             // 
             // btnCalcNum
@@ -71,24 +72,26 @@
             this.btnCalcNum.UseVisualStyleBackColor = true;
             this.btnCalcNum.Click += new System.EventHandler(this.btnCalcNum_Click);
             // 
-            // label2
+            // tbPasswd
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 56);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 12);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "计算号码：";
+            this.tbPasswd.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbPasswd.Location = new System.Drawing.Point(387, 62);
+            this.tbPasswd.Multiline = true;
+            this.tbPasswd.Name = "tbPasswd";
+            this.tbPasswd.ReadOnly = true;
+            this.tbPasswd.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbPasswd.Size = new System.Drawing.Size(360, 531);
+            this.tbPasswd.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(561, 525);
+            this.ClientSize = new System.Drawing.Size(770, 605);
+            this.Controls.Add(this.tbPasswd);
             this.Controls.Add(this.btnCalcNum);
             this.Controls.Add(this.tbResultNum);
             this.Controls.Add(this.tbIdNum);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "CheckId";
@@ -103,7 +106,7 @@
         private System.Windows.Forms.TextBox tbIdNum;
         private System.Windows.Forms.TextBox tbResultNum;
         private System.Windows.Forms.Button btnCalcNum;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tbPasswd;
     }
 }
 

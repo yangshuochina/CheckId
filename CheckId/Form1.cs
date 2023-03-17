@@ -20,6 +20,7 @@ namespace CheckId
         String m_strOriginNum = "";
         String m_strValidatedNum = "";
         int m_numCount;
+        List<byte> m_findDays = new List<byte>();
     
         public readonly int[] m_weight = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 };    //十七位数字本体码权重
         public readonly char[] m_validate = { '1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2' };    //mod11,对应校验码字符值    
@@ -29,6 +30,7 @@ namespace CheckId
         {
             int i, j;
             String strTemp;
+            byte curDay;
             m_strOriginNum = tbIdNum.Text;
             //MessageBox.Show(m_strOriginIdNum);
             m_NumToValidate = new char[18];
@@ -42,10 +44,12 @@ namespace CheckId
                 //输入数字符合要求，开始校验所有可能的号码
 
                 tbResultNum.Text = "";
+                tbPasswd.Text = "";
                 m_numCount = 0;
-                for (i=1; i <= 12; i++)
+                m_findDays.Clear();
+                for (j=1; j<=31; j++)
                 {
-                    for (j=1; j<=31; j++)
+                    for (i=1; i <= 12; i++)
                     {
                         if ((i == 4 || i == 6 || i == 9 || i == 11) && j == 31) break;
                         if ((i == 2) && (j >= 30)) break;
@@ -57,9 +61,16 @@ namespace CheckId
                         m_NumToValidate[13] = (char)(j % 10 + (byte)'0');
                         if (true == CheckValidateCode(m_NumToValidate))
                         {
-                            m_numCount++;
-                            strTemp = new string(m_NumToValidate);
-                            tbResultNum.Text += strTemp  + "\r\n";
+                            curDay = (byte)j;
+                            if (false == m_findDays.Contains(curDay))
+                            {
+                                m_numCount++;
+                                m_findDays.Add(curDay);
+                                strTemp = new string(m_NumToValidate);
+                                m_strValidatedNum = strTemp.Substring(strTemp.Length - 6, 6);
+                                tbResultNum.Text += strTemp  + "\r\n";
+                                tbPasswd.Text += @"hbucm@" + m_strValidatedNum  + "\r\n";
+                            }
                         }
                     }
                 }
@@ -107,24 +118,28 @@ namespace CheckId
             char c;
             bool result = true;
 
-            if (strNum.Length != 18)
+
+            if (String.IsNullOrEmpty(strNum) || (strNum.Length != 18))
             {
                 result = false;
             }
-            for (int i=0; i<18; i++)
+            else
             {
-                c = strNum[i];
-                if ((c >= '0' && c <= '9') ||
-                    (i >= 10 && i <= 13) ||
-                    (i==17 && c =='X'))
+                for (int i=0; i<18; i++)
                 {
-                    m_NumToValidate[i] = c;
-                    continue;
-                }
-                else
-                {
-                    result = false;
-                    break;
+                    c = strNum[i];
+                    if ((c >= '0' && c <= '9') ||
+                        (i >= 10 && i <= 13) ||
+                        (i==17 && c =='X'))
+                    {
+                        m_NumToValidate[i] = c;
+                        continue;
+                    }
+                    else
+                    {
+                        result = false;
+                        break;
+                    }
                 }
             }
 
